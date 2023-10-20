@@ -162,20 +162,49 @@ namespace API_Ventas.Controllers
         [Route("Listar")]
         public IActionResult ListarUsuario()
         {
-            List<Usuario> usuario = new List<Usuario>();
-            _context.Usuarios.ToList();
-            return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto", mensaje = usuario });
+            try
+            {
+                List<Usuario> usuario = new List<Usuario>();
+                _context.Usuarios.ToList();
+                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto", mensaje = usuario });
+            }catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+            }
         }
         [HttpPost]
         [Route("Insertar")]
         public IActionResult InsetarUsuario(string nombre, string password)
         {
-            Usuario usuarios = new Usuario();
-            usuarios.NomUsuario = nombre;
-            usuarios.Password = password;
-            _context.Usuarios.Add(usuarios);
-            _context.SaveChanges();
-            return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto" });
+            try
+            {
+                Usuario usuarios = new Usuario();
+                usuarios.NomUsuario = nombre;
+                usuarios.Password = password;
+                _context.Usuarios.Add(usuarios);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto" });
+            }catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+            }
         }
+        [HttpPost]
+        [Route("Eliminar")]
+        public IActionResult Eliminar(string nombre)
+        {
+            try
+            {
+                Usuario? us = _context.Usuarios.Find(nombre);
+                _context.Usuarios.Remove(us);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Correcto" });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+            }
+        }
+        //FALTA EDITAR
     }
 }
