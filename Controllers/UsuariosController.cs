@@ -160,7 +160,7 @@ namespace API_Ventas.Controllers
           return (_context.Usuarios?.Any(e => e.NomUsuario == id)).GetValueOrDefault();
         }
         [HttpGet]
-        [Route("Listar")]
+        [Route("ListarUsuario")]
         public IActionResult ListarUsuario()
         {
             try
@@ -174,7 +174,7 @@ namespace API_Ventas.Controllers
             }
         }
         [HttpPost]
-        [Route("Insertar")]
+        [Route("InsertarUsuario")]
         public IActionResult InsetarUsuario(string nombre, string password, int estado)
         {
             try
@@ -192,7 +192,7 @@ namespace API_Ventas.Controllers
             }
         }
         [HttpPost]
-        [Route("Eliminar")]
+        [Route("EliminarUsuario")]
         public IActionResult Eliminar(string nombre)
         {
             try
