@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using API_Ventas.Models;
+using System.Collections;
 
 namespace API_Ventas.Controllers
 {
@@ -165,22 +166,23 @@ namespace API_Ventas.Controllers
             try
             {
                 List<Usuario> usuario = new List<Usuario>();
-                _context.Usuarios.ToList();
-                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto", mensaje = usuario });
+                usuario = _context.Usuarios.FromSqlRaw("SELECT * FROM USUARIO").ToList();
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Correcto", respuesta = usuario });
             }catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Error", respuesta = ex.Message });
             }
         }
         [HttpPost]
         [Route("Insertar")]
-        public IActionResult InsetarUsuario(string nombre, string password)
+        public IActionResult InsetarUsuario(string nombre, string password, int estado)
         {
             try
             {
                 Usuario usuarios = new Usuario();
                 usuarios.NomUsuario = nombre;
                 usuarios.Password = password;
+                usuarios.Estado = estado;
                 _context.Usuarios.Add(usuarios);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto" });
