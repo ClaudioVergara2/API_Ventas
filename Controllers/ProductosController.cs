@@ -191,6 +191,22 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Error", respuesta = ex.Message });
             }
         }
-        //FALTA ELIMINAR Y EDITAR
+        [HttpPost]
+        [Route("EliminarProducto")]
+        public IActionResult Eliminar(int IdProducto)
+        {
+            try
+            {
+                Producto? prod = _context.Productos.Find(IdProducto);
+                _context.Productos.Remove(prod);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Correcto" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+            }
+        }
+        //FALTA EDITAR
     }
 }
