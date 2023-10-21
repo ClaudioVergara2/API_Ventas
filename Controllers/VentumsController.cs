@@ -192,33 +192,46 @@ namespace API_Ventas.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(NomUsuario))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El nombre de usuario es obligatorio." });
+                }
+
+                if (IDProducto <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDProducto es obligatorio y debe ser un número." });
+                }
+
+                if (Cantidad <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La cantidad es obligatorio y debe ser un número." });
+                }
+
                 var existingUsuario = _context.Usuarios.FirstOrDefault(u => u.NomUsuario == NomUsuario);
                 var existingProducto = _context.Productos.Find(IDProducto);
 
                 if (existingUsuario == null)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Usuario no encontrado" });
+                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Usuario no encontrado." });
                 }
 
-                if (existingUsuario.Estado == 0) // 0 representa usuario inhabilitado
+                if (existingUsuario.Estado == 0)
                 {
-                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "Usuario inhabilitado, imposible crear venta" });
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "Usuario inhabilitado, imposible crear una venta." });
                 }
 
-                // Verificar si el usuario ya ha realizado una venta
                 var ventaExistente = _context.Venta.FirstOrDefault(v => v.NomUsuario == existingUsuario.NomUsuario);
 
                 if (ventaExistente != null)
                 {
-                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El usuario ya ha realizado una venta" });
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El usuario ya ha realizado una venta." });
                 }
 
                 if (existingProducto == null)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Producto no encontrado" });
+                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Producto no encontrado." });
                 }
 
-                // Crear una nueva venta
                 var nuevaVenta = new Ventum
                 {
                     IdProducto = existingProducto.IdProducto,
@@ -232,7 +245,7 @@ namespace API_Ventas.Controllers
                 _context.Venta.Add(nuevaVenta);
                 _context.SaveChanges();
 
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Venta creada correctamente" });
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Venta creada correctamente." });
             }
             catch (Exception ex)
             {
@@ -246,18 +259,35 @@ namespace API_Ventas.Controllers
         {
             try
             {
-                // Buscar la venta por el nombre de usuario y otras propiedades, cargando ansiosamente la propiedad IdProductoNavigation
+                if (string.IsNullOrWhiteSpace(nomUsuario))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El nombre de usuario es obligatorio." });
+                }
+
+                if (idProducto <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDProducto es obligatorio y debe ser un número." });
+                }
+
+                if (cantidad <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La cantidad es obligatorio y debe ser un número." });
+                }
+
+                if (estado != 0 && estado != 1)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El campo estado debe ser 0 o 1." });
+                }
+
                 var existingVenta = _context.Venta
                     .Include(v => v.IdProductoNavigation)
                     .FirstOrDefault(v => v.NomUsuario == nomUsuario && v.IdProducto == idProducto);
 
                 if (existingVenta != null)
                 {
-                    // Actualizar la cantidad
                     existingVenta.Cantidad = cantidad;
                     existingVenta.Estado = estado;
 
-                    // Recalcular el total si IdProductoNavigation no es nulo
                     if (existingVenta.IdProductoNavigation != null)
                     {
                         existingVenta.Total = cantidad * existingVenta.IdProductoNavigation.Precio;
@@ -289,6 +319,11 @@ namespace API_Ventas.Controllers
         {
             try
             {
+                if (IDVenta <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDVenta es obligatorio y debe ser un número" });
+                }
+
                 var venta = _context.Venta.Find(IDVenta);
 
                 if (venta != null)

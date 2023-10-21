@@ -183,7 +183,10 @@ namespace API_Ventas.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La descripción del producto es obligatoria." });
                 }
 
-                //FALTA VALIDAR PRECIO
+                if (precio <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El precio es obligatorio y debe ser un número." });
+                }
 
                 Producto producto = new Producto();
                 producto.DescProducto = descProducto;
@@ -204,7 +207,10 @@ namespace API_Ventas.Controllers
         {
             try
             {
-                //FALTA VALIDAR ID
+                if (IdProducto <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDProducto es obligatorio y debe ser un número." });
+                }
 
                 Producto? prod = _context.Productos.Find(IdProducto);
                 if (prod == null)
@@ -226,14 +232,20 @@ namespace API_Ventas.Controllers
         {
             try
             {
-                //FALTA VALIDAR ID
+                if (IDProducto <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDProducto es obligatorio y debe ser un número." });
+                }
 
                 if (string.IsNullOrWhiteSpace(DescProducto))
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La descripción del producto es obligatorio." });
                 }
 
-                //FALTA VALIDAR PRECIO
+                if (Precio <= 0)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El precio es obligatorio y debe ser un número" });
+                }
 
                 var existingProduct = _context.Productos.Find(IDProducto);
 
