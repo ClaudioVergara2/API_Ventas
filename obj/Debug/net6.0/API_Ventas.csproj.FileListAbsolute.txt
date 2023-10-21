@@ -536,3 +536,5 @@ C:\Users\marti\Desktop\ProgWeb2\API_Ventas\obj\Debug\net6.0\refint\API_Ventas.dl
 C:\Users\marti\Desktop\ProgWeb2\API_Ventas\obj\Debug\net6.0\API_Ventas.pdb
 C:\Users\marti\Desktop\ProgWeb2\API_Ventas\obj\Debug\net6.0\API_Ventas.genruntimeconfig.cache
 C:\Users\marti\Desktop\ProgWeb2\API_Ventas\obj\Debug\net6.0\ref\API_Ventas.dll
+C:\Users\User\source\repos\API_Ventas\bin\Debug\net6.0\xunit.abstractions.dll
+C:\Users\User\source\repos\API_Ventas\bin\Debug\net6.0\xunit.core.dll

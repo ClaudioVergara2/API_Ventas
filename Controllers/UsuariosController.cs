@@ -175,20 +175,41 @@ namespace API_Ventas.Controllers
         }
         [HttpPost]
         [Route("InsertarUsuario")]
-        public IActionResult InsetarUsuario(string nombre, string password, int estado)
+        public IActionResult InsertarUsuario(string nombre, string password, int estado)
         {
             try
             {
-                Usuario usuarios = new Usuario();
-                usuarios.NomUsuario = nombre;
-                usuarios.Password = password;
-                usuarios.Estado = estado;
-                _context.Usuarios.Add(usuarios);
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El nombre de usuario es obligatorios." });
+                }
+
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La contraseña es obligatorios." });
+                }
+
+                if (estado != 0 && estado != 1)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El campo estado debe ser 0 o 1." });
+                }
+
+                if (_context.Usuarios.Any(u => u.NomUsuario == nombre))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El nombre de usuario " + nombre + " ya existe." });
+                }
+                Usuario usuario = new Usuario
+                {
+                    NomUsuario = nombre,
+                    Password = password,
+                    Estado = estado
+                };
+                _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new { respuesta = "Correcto" });
-            }catch(Exception ex)
+            }catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
         [HttpPost]
@@ -197,46 +218,58 @@ namespace API_Ventas.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El nombre de usuario es obligatorio." });
+                }
                 Usuario? us = _context.Usuarios.Find(nombre);
+                if (us == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "El usuario con nombre " + nombre + " no se encontró." });
+                }
                 _context.Usuarios.Remove(us);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Correcto" });
-            }
-            catch(Exception ex)
+            }catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-
         [HttpPost]
         [Route("EditarUsuario")]
         public IActionResult EditarUsuario(string nombre, string password, int estado)
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El nombre de usuario es obligatorio." });
+                }
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La contraseña es obligatoria." });
+                }
+                if (estado != 0 && estado != 1)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El campo estado debe ser 0 o 1." });
+                }
                 var existingUsuario = _context.Usuarios.Find(nombre);
-
                 if (existingUsuario != null)
                 {
                     existingUsuario.Password = password;
                     existingUsuario.Estado = estado;
-
                     _context.Usuarios.Update(existingUsuario);
                     _context.SaveChanges();
-
-                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Usuario actualizado correctamente" });
-                }
-                else
+                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Actualizado correctamente" });
+                }else
                 {
                     return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Usuario no encontrado" });
                 }
-            }
-            catch (Exception ex)
+            }catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-
 
     }
 }
