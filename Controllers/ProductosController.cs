@@ -178,6 +178,13 @@ namespace API_Ventas.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(descProducto))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La descripción del producto es obligatoria." });
+                }
+
+                //FALTA VALIDAR PRECIO
+
                 Producto producto = new Producto();
                 producto.DescProducto = descProducto;
                 producto.Precio = precio;
@@ -197,7 +204,13 @@ namespace API_Ventas.Controllers
         {
             try
             {
+                //FALTA VALIDAR ID
+
                 Producto? prod = _context.Productos.Find(IdProducto);
+                if (prod == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "El producto con ID: " + IdProducto + ", no se encontró." });
+                }
                 _context.Productos.Remove(prod);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Correcto" });
@@ -207,13 +220,21 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-
         [HttpPost]
         [Route("EditarProducto")]
         public IActionResult EditarProducto(int IDProducto, string DescProducto, int Precio)
         {
             try
             {
+                //FALTA VALIDAR ID
+
+                if (string.IsNullOrWhiteSpace(DescProducto))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "La descripción del producto es obligatorio." });
+                }
+
+                //FALTA VALIDAR PRECIO
+
                 var existingProduct = _context.Productos.Find(IDProducto);
 
                 if (existingProduct != null)
@@ -224,7 +245,7 @@ namespace API_Ventas.Controllers
                     _context.Productos.Update(existingProduct);
                     _context.SaveChanges();
 
-                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Producto actualizado correctamente" });
+                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Actualizado correctamente" });
                 }
                 else
                 {
@@ -236,6 +257,5 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-
     }
 }
