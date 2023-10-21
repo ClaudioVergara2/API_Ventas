@@ -207,6 +207,35 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-        //FALTA EDITAR
+
+        [HttpPost]
+        [Route("EditarProducto")]
+        public IActionResult EditarProducto(int IDProducto, string DescProducto, int Precio)
+        {
+            try
+            {
+                var existingProduct = _context.Productos.Find(IDProducto);
+
+                if (existingProduct != null)
+                {
+                    existingProduct.DescProducto = DescProducto;
+                    existingProduct.Precio = Precio;
+
+                    _context.Productos.Update(existingProduct);
+                    _context.SaveChanges();
+
+                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Producto actualizado correctamente" });
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Producto no encontrado" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
+            }
+        }
+
     }
 }

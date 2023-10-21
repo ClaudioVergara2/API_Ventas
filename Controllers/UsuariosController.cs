@@ -207,6 +207,36 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-        //FALTA EDITAR
+
+        [HttpPost]
+        [Route("EditarUsuario")]
+        public IActionResult EditarUsuario(string nombre, string password, int estado)
+        {
+            try
+            {
+                var existingUsuario = _context.Usuarios.Find(nombre);
+
+                if (existingUsuario != null)
+                {
+                    existingUsuario.Password = password;
+                    existingUsuario.Estado = estado;
+
+                    _context.Usuarios.Update(existingUsuario);
+                    _context.SaveChanges();
+
+                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Usuario actualizado correctamente" });
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Usuario no encontrado" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
+            }
+        }
+
+
     }
 }
