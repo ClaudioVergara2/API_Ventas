@@ -212,7 +212,7 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
             }
         }
-        [HttpPost]
+        [HttpDelete]
         [Route("EliminarUsuario")]
         public IActionResult Eliminar(string nombre)
         {

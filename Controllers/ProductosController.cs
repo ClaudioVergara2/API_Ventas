@@ -198,7 +198,7 @@ namespace API_Ventas.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Error", respuesta = ex.Message });
             }
         }
-        [HttpPost]
+        [HttpDelete]
         [Route("EliminarProducto")]
         public IActionResult Eliminar(int IdProducto)
         {
