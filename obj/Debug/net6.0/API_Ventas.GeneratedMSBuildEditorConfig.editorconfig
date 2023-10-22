@@ -9,69 +9,69 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = API_Ventas
 build_property.RootNamespace = API_Ventas
-build_property.ProjectDir = C:\Users\User\source\repos\API_Ventas\
+build_property.ProjectDir = C:\Users\Marto\Desktop\Prog Web 2\API_Ventas\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\User\source\repos\API_Ventas
+build_property.MSBuildProjectDirectory = C:\Users\Marto\Desktop\Prog Web 2\API_Ventas
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Productoes/Create.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Productoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Productoes/Delete.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Productoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Productoes/Details.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Productoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Productoes/Edit.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Productoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Productoes/Index.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Productoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9lc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Usuarios/Create.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Usuarios/Delete.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Usuarios/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Usuarios/Details.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Usuarios/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Usuarios/Edit.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Usuarios/Index.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Ventas/Create.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Ventas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Ventas/Delete.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Ventas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Ventas/Edit.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Ventas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/API_Ventas/Views/Ventas/List.cshtml]
+[C:/Users/Marto/Desktop/Prog Web 2/API_Ventas/Views/Ventas/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

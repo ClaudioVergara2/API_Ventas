@@ -314,34 +314,41 @@ namespace API_Ventas.Controllers
         }
 
         [HttpDelete]
-        [Route("EliminarVenta")]
-        public IActionResult EliminarVenta(int IDVenta)
+[Route("EliminarVenta")]
+public IActionResult CambiarEstadoVenta(int IDVenta, int nuevoEstado)
+{
+    try
+    {
+        if (IDVenta <= 0)
         {
-            try
-            {
-                if (IDVenta <= 0)
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDVenta es obligatorio y debe ser un número" });
-                }
-
-                var venta = _context.Venta.Find(IDVenta);
-
-                if (venta != null)
-                {
-                    _context.Venta.Remove(venta);
-                    _context.SaveChanges();
-
-                    return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Venta eliminada correctamente" });
-                }
-                else
-                {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Venta no encontrada" });
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
-            }
+            return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El IDVenta es obligatorio y debe ser un número" });
         }
+
+        if (nuevoEstado != 0 && nuevoEstado != 1)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = "Error", respuesta = "El campo nuevoEstado debe ser 0 o 1." });
+        }
+
+        var venta = _context.Venta.Find(IDVenta);
+
+        if (venta != null)
+        {
+            venta.Estado = nuevoEstado;
+            _context.Venta.Update(venta);
+            _context.SaveChanges();
+
+            return StatusCode(StatusCodes.Status200OK, new { mensaje = "OK", respuesta = "Estado de la venta cambiado correctamente" });
+        }
+        else
+        {
+            return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Error", respuesta = "Venta no encontrada" });
+        }
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(StatusCodes.Status500InternalServerError, new { respuesta = "Error", mensaje = ex.Message });
+    }
+}
+
     }
 }
