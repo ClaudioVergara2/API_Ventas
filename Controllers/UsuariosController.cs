@@ -165,14 +165,22 @@ namespace API_Ventas.Controllers
         {
             try
             {
-                List<Usuario> usuario = new List<Usuario>();
-                usuario = _context.Usuarios.FromSqlRaw("SELECT * FROM USUARIO").ToList();
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Correcto", respuesta = usuario });
-            }catch (Exception ex)
+                List<Usuario> usuarios = _context.Usuarios.ToList();
+
+                var usuariosViewModel = usuarios.Select(usuario => new
+                {
+                    NomUsuario = usuario.NomUsuario,
+                    Estado = usuario.Estado == 1 ? "Habilitado" : "Inhabilitado"
+                }).ToList();
+
+                return Ok(new { mensaje = "Correcto", respuesta = usuariosViewModel });
+            }
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Error", respuesta = ex.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = "Error", respuesta = ex.Message });
             }
         }
+
         [HttpPost]
         [Route("InsertarUsuario")]
         public IActionResult InsertarUsuario(string nombre, string password, int estado)
