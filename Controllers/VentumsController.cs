@@ -172,17 +172,32 @@ namespace API_Ventas.Controllers
 
         [HttpGet]
         [Route("ListarVentas")]
-        public IActionResult ListarUsuario()
+        public IActionResult ListarVentas(int? estado = null, string nombreUsuario = "")
         {
             try
             {
-                List<Ventum> venta = new List<Ventum>();
-                venta = _context.Venta.FromSqlRaw("SELECT * FROM VENTA").ToList();
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Correcto", respuesta = venta });
+                var query = _context.Venta
+                    .Join(_context.Usuarios, v => v.NomUsuario, u => u.NomUsuario, (venta, usuario) => new { Venta = venta, Usuario = usuario })
+                    .Join(_context.Productos, vu => vu.Venta.IdProducto, p => p.IdProducto, (vu, producto) => new { VentaUsuario = vu, Producto = producto })
+                    .Where(result =>
+                        (estado == null || result.VentaUsuario.Venta.Estado == estado) && // Filtra por estado si se proporciona
+                        (string.IsNullOrEmpty(nombreUsuario) || result.VentaUsuario.Usuario.NomUsuario == nombreUsuario)) // Filtra por nombre de usuario si se proporciona
+                    .Select(result => new
+                    {
+                        NombreUsuario = result.VentaUsuario.Usuario.NomUsuario,
+                        Producto = result.Producto.DescProducto,
+                        Precio = result.Producto.Precio,
+                        Cantidad = result.VentaUsuario.Venta.Cantidad,
+                        Total = result.VentaUsuario.Venta.Total,
+                        Estado = result.VentaUsuario.Venta.Estado == 1 ? "Habilitado" : "Inhabilitado"
+                    })
+                    .ToList();
+
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Correcto", respuesta = query });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Error", respuesta = ex.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = "Error", respuesta = ex.Message });
             }
         }
 

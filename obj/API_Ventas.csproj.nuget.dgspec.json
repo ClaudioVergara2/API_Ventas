@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marto\\Desktop\\Prog Web 2\\API_Ventas\\API_Ventas.csproj": {}
+    "C:\\Users\\jmuno\\OneDrive\\Escritorio\\pruebas\\API_Ventas\\API_Ventas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marto\\Desktop\\Prog Web 2\\API_Ventas\\API_Ventas.csproj": {
+    "C:\\Users\\jmuno\\OneDrive\\Escritorio\\pruebas\\API_Ventas\\API_Ventas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marto\\Desktop\\Prog Web 2\\API_Ventas\\API_Ventas.csproj",
+        "projectUniqueName": "C:\\Users\\jmuno\\OneDrive\\Escritorio\\pruebas\\API_Ventas\\API_Ventas.csproj",
         "projectName": "API_Ventas",
-        "projectPath": "C:\\Users\\Marto\\Desktop\\Prog Web 2\\API_Ventas\\API_Ventas.csproj",
-        "packagesPath": "C:\\Users\\Marto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marto\\Desktop\\Prog Web 2\\API_Ventas\\obj\\",
+        "projectPath": "C:\\Users\\jmuno\\OneDrive\\Escritorio\\pruebas\\API_Ventas\\API_Ventas.csproj",
+        "packagesPath": "C:\\Users\\jmuno\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jmuno\\OneDrive\\Escritorio\\pruebas\\API_Ventas\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Marto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jmuno\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

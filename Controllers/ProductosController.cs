@@ -160,18 +160,31 @@ namespace API_Ventas.Controllers
         }
         [HttpGet]
         [Route("ListarProducto")]
-        public IActionResult Listar()
+        public IActionResult Listar(int? IdProducto)
         {
             try
             {
                 List<Producto> productos = new List<Producto>();
-                productos = _context.Productos.FromSqlRaw("SELECT * FROM PRODUCTO").ToList();
+
+                if (IdProducto.HasValue)
+                {
+                    // Si se proporciona un ID, busca un producto específico
+                    productos = _context.Productos.FromSqlRaw("SELECT * FROM PRODUCTO WHERE Id_Producto = {0}", IdProducto.Value).ToList();
+                }
+                else
+                {
+                    // Si no se proporciona un ID, carga todos los productos
+                    productos = _context.Productos.FromSqlRaw("SELECT * FROM PRODUCTO").ToList();
+                }
+
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Correcto", respuesta = productos });
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Error", respuesta = ex.Message });
             }
         }
+
         [HttpPost]
         [Route("InsertarProducto")]
         public IActionResult Insertar(string descProducto, int precio)
