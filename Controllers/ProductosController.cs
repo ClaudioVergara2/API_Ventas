@@ -168,12 +168,10 @@ namespace API_Ventas.Controllers
 
                 if (IdProducto.HasValue)
                 {
-                    // Si se proporciona un ID, busca un producto específico
                     productos = _context.Productos.FromSqlRaw("SELECT * FROM PRODUCTO WHERE Id_Producto = {0}", IdProducto.Value).ToList();
                 }
                 else
                 {
-                    // Si no se proporciona un ID, carga todos los productos
                     productos = _context.Productos.FromSqlRaw("SELECT * FROM PRODUCTO").ToList();
                 }
 

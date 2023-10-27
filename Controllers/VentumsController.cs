@@ -180,8 +180,8 @@ namespace API_Ventas.Controllers
                     .Join(_context.Usuarios, v => v.NomUsuario, u => u.NomUsuario, (venta, usuario) => new { Venta = venta, Usuario = usuario })
                     .Join(_context.Productos, vu => vu.Venta.IdProducto, p => p.IdProducto, (vu, producto) => new { VentaUsuario = vu, Producto = producto })
                     .Where(result =>
-                        (estado == null || result.VentaUsuario.Venta.Estado == estado) && // Filtra por estado si se proporciona
-                        (string.IsNullOrEmpty(nombreUsuario) || result.VentaUsuario.Usuario.NomUsuario == nombreUsuario)) // Filtra por nombre de usuario si se proporciona
+                        (estado == null || result.VentaUsuario.Venta.Estado == estado) &&
+                        (string.IsNullOrEmpty(nombreUsuario) || result.VentaUsuario.Usuario.NomUsuario == nombreUsuario))
                     .Select(result => new
                     {
                         NombreUsuario = result.VentaUsuario.Usuario.NomUsuario,
@@ -189,7 +189,7 @@ namespace API_Ventas.Controllers
                         Precio = result.Producto.Precio,
                         Cantidad = result.VentaUsuario.Venta.Cantidad,
                         Total = result.VentaUsuario.Venta.Total,
-                        Estado = result.VentaUsuario.Venta.Estado == 1 ? "Habilitado" : "Inhabilitado"
+                        Estado = result.VentaUsuario.Venta.Estado == 1 ? "Realizada" : "Anulada"
                     })
                     .ToList();
 
